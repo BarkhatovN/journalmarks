@@ -1,0 +1,19 @@
+<!doctype html>
+<title>Output</title>
+
+
+<b>{{user}}<p></b>
+
+{%- for subject in subjects -%}
+	<li><a>{{ subject }}</a>:  
+		{% for mark in subject_marks[subject] %}
+			{% if loop.last %}
+				{{ ': %s'|format(mark)}}
+			{% elif loop.length - loop.index == 1 %}    
+				{{ '%s'|format(mark)}}
+			{% else %}
+				{{ '%s '|format(mark)}}    
+			{% endif %}
+		{% endfor %} 
+	</li>
+{%- endfor -%} 

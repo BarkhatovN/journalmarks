@@ -9,20 +9,14 @@ def get_user_subject_marks(
         auth_url='https://petersburgedu.ru/user/auth/login',
         marks_url='https://petersburgedu.ru/dnevnik/lessons/'):
     #Authorization
-    data = {}
-    data['login'] = login
-    data['password'] = password
-    data['auth_url'] = auth_url
-    data['marks_url'] = marks_url
-
     g = Grab()
     try:
-        g.go(data['auth_url'])
+        g.go(auth_url)
     except Exception:
         raise Exception("Can not get", auth_url)
 
-    g.doc.set_input_by_id('Login', data['login'])
-    g.doc.set_input_by_id('Password', data['password'])
+    g.doc.set_input_by_id('Login', login)
+    g.doc.set_input_by_id('Password', password)
     g.doc.submit(submit_name="Войти")
     g.doc.submit(submit_name="Войти")
 
@@ -30,7 +24,7 @@ def get_user_subject_marks(
         raise Exception("Error: Authorization has been failed <br>" + 
                 "Try another pair of Login and Password")
 
-    g.go(data['marks_url'])
+    g.go(marks_url)
 
     #Parsing
     soup = BeautifulSoup(g.doc.body.decode('utf-8'), 'html.parser')

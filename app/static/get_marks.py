@@ -68,7 +68,7 @@ def get_user_subject_marks(
     for subject in subject_marks:
         marks = subject_marks[subject]
         if len(marks) != 0:
-            average_mark = sum(marks) / len(marks)
+            average_mark = round(sum(marks) / len(marks),2)
             subject_marks[subject].append(average_mark)
     return user, subject_marks
 

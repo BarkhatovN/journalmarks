@@ -1,19 +1,40 @@
-<!doctype html>
-<title>Output</title>
+{% extends "layout.html" %}
+{% block body %}
 
-
-<b>{{user}}<p></b>
-
-{%- for subject in subjects -%}
-	<li><a>{{ subject }}</a>:  
-		{% for mark in subject_marks[subject] %}
-			{% if loop.last %}
-				{{ ': %s'|format(mark)}}
-			{% elif loop.length - loop.index == 1 %}    
-				{{ '%s'|format(mark)}}
-			{% else %}
-				{{ '%s '|format(mark)}}    
-			{% endif %}
-		{% endfor %} 
-	</li>
-{%- endfor -%} 
+<div class="welcome">
+	<h1 align="center">{{user}}</h1>
+	<br>
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<table class="table  marks">
+			<thead>
+				<tr>
+					<th>Предмет</th>
+					<th>Оценки</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+			{%- for subject in subjects -%}
+			<tr>
+				<td> 
+					{{ subject }} 
+				</td>  
+				<td> 
+					{% for mark in subject_marks[subject] %} 
+						{% if loop.last %}
+							{{ ': %s'|format(mark)}}
+						{% elif loop.length - loop.index == 1 %}    
+							{{ '%s'|format(mark)}}
+						{% else %}
+							{{ '%s '|format(mark)}}    
+						{% endif %}
+					{% endfor %} 
+				</td> 
+			</tr>
+			{%- endfor -%}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock%}
